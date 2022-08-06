@@ -15,10 +15,11 @@ class RadiusServer(server.Server):
         for attr in pkt.keys():
             print("%s: %s" % (attr, pkt[attr]))
 
+        print(database.validateNas(pkt["NAS-Identifier"],pkt["NAS-IP-Address"],pkt["Secret"]))
+
         reply = self.CreateReplyPacket(pkt, **{
             "Service-Type": "Framed-User",
-            "Framed-IP-Address": '192.168.0.1',
-            "Framed-IPv6-Prefix": "fc66::1/64"
+            "Framed-IP-Address": '192.168.0.1'
         })
 
         reply.code = packet.AccessAccept
