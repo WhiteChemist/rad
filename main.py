@@ -10,6 +10,10 @@ logging.basicConfig(filename="pyrad.log", level="DEBUG",
 class RadiusServer(server.Server):
 
     def HandleAuthPacket(self, pkt):
+        pwd=pkt.PwDecrypt(pkt['User-Password'][0])
+        uname=pkt['User-Name'][0]
+        print(uname)
+        print('Plaintext PW: {}'.format(pwd))
         print("Received an authentication request")
         print("Attributes: ")
         for attr in pkt.keys():
